@@ -2,9 +2,9 @@
   <img src="logo_blue.png" width="580"/>
 </div>
 
-* Demonstration website backend code (Without transformers or langchains) for memory optimized open source frontend deployment
-* Implements RAG using glove-gigaword-50 vector embeddings instead of high memory transformer models or paid serverless API services
-* Great for initial learning and experimentation with vector embedding models
+* Backend code for the Demonstration website (Without transformers or langchains) for memory optimized open source frontend deployment
+* Implements RAG using GloVe (gigaword-50) vector embeddings, avoiding memory-heavy transformer models and paid serverless APIs.
+* Great for initial learning and experimentating with vector embedding-based retrieval in a low-resource setup.
 
 <p align="center">
   <a href="https://www.apache.org/licenses/LICENSE-2.0">
@@ -21,15 +21,74 @@
   <img src="https://img.shields.io/badge/fastapi-0.115.12-blue" alt="FastAPI Version" />
 </p>
 
-> **Backend code for a demo website built without transformers or LangChain — optimized for lightweight, open-source frontend deployments.**
-
-> Implements Retrieval-Augmented Generation (RAG) using GloVe (gigaword-50) embeddings, avoiding memory-heavy transformer models and paid serverless APIs.
-
-> Useful for learning and experimenting with vector embedding-based retrieval in a low-resource setup.
-
 > Support with star ⭐ if you find this useful..
+---
+* Standalone Python app
+```bash
+python main.py
+```
+* Standalone Fast API python app
+```bash
+uvicorn app:app --reload
+```
+* Docker 
+```bash
+docker build -t true-notion-ai . 
+
+docker run --env-file .env -d -p 9000:9000 true-notion-ai
+--> Any custom <LOCAL_PORT>:<CONTAINER_PORT>
+--> or through adding PORT variable in .env
+```
 
 Author: [Sarvesh Telang](https://www.linkedin.com/in/sarvesh-telang-17916448/)
+
+---
+---
+tags:
+- glove
+- gensim
+- fse
+---
+# Glove Twitter 
+
+Pre-trained glove vectors based on 2B tweets, 27B tokens, 1.2M vocab, uncased.
+
+Read more:
+* https://nlp.stanford.edu/projects/glove/
+* https://nlp.stanford.edu/pubs/glove.pdf
+
+Author: Jeffrey Pennington, Richard Socher and Christopher D. Manning
+
+---
+
+## Frontend Deployment Solution for Open Source RAG Projects
+- ### Sarvesh Telang
+
+Note:
+This project can be implemented and extended with any advanced LLM and vector embedding models. However, free frontend deployment platforms such as Render, Fly.io, Railway, Koyeb, and others typically impose strict resource limits — usually around 512 MB RAM and 1 GB storage.
+
+These constraints necessitate completely isolating the app from outbound HTTP calls, which makes running large transformer models with high parameter counts impractical unless you chose paid services or rely on serverless APIs.
+
+Proposed Approach:
+To address this, you can use a lightweight embedding model that balances moderate accuracy with efficient similarity search.
+
+For fully offline vector embedding generation, download the pre-trained GloVe embeddings file:
+
+glove.6B.50d.txt
+Available on Kaggle:
+https://www.kaggle.com/datasets/watts2/glove6b50dtxt (Author: Ashish Lal)
+
+Convert the GloVe file into the Word2Vec format using the glove2word2vec tool. Then, load it with the python KeyedVectors library for seamless integration into your project.
+
+You can explore a lot more and accurate vector embedding models with txt files, however looking at the currently available sources (May 2025) this Glove-50 model turns out to be having the lowest size (167 mb).
+
+Alternatively if your server platform allows more storage you can experiment with other embedding models listed in following sources:
+
+https://www.kaggle.com/datasets/reppy4620/embeddings
+
+https://www.edenai.co/post/top-free-embedding-tools-apis-and-open-source-models
+
+https://www.kaggle.com/code/vikas15/word-embeddings
 
 ---
 Refer main repo -->
@@ -46,18 +105,6 @@ Refer main repo -->
 
 ---
 
-## How it Works:
-
-- **Extract insights from Notion notes:** Sync personal or business documents into a Notion database that form the base of your **internal knowledge layer**.
-- **Memory Routing via Upstash Redis:** Stores document/task metadata to support fast lookup, secure and persistent data retrieval.
-- **Chunking & Embedding (LangChain):** Documents are split into RAG-optimized chunks with configurable top-K, chunk size, and window size.
-- **Vectorization & Semantic Retrieval:** Uses local or API-based embeddings (e.g., Mistral) and indexes them into a **Vector Database** like FAISS or Upstash.
-- **Tool Creation:** Tools such as VectorStoreTool and SummaryTool are created from the knowledge base and reused across different AI agents.
-- **Multi-Agent Orchestration with CrewAI:** Starts with a **Knowledge Analyst** agent and is easily extendable with Web Search Agents (Serper), Sentiment Analyzers, and Domain Experts (e.g., Finance, Sales).
-- **Response Generation via LLMs:** Uses **Mistral** or plugin-based LLM APIs with concurrent multi-model support for tailored responses.
-- **FastAPI Backend + Optional Frontend:** Backend manages routing and conversations, with a frontend deployable on GitHub Pages, Vercel, or any static host.
-
----
-
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+© Copyright 2025 Sarvesh Telang
 
