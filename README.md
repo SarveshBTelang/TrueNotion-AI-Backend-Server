@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/9e3fbb5b-9eda-4eef-89cf-fc60f7a00e17" width="580"/>
-  <br><br>
-  <img src="https://github.com/user-attachments/assets/fb78973b-0d60-40ba-acda-c82dd9f86b38" width="300"/>
+  <img src="logo_blue.png" width="580"/>
 </div>
 
-(Render)
+* Demonstration website backend code (Without transformers or langchains) for memory optimized open source frontend deployment
+* Implements RAG using glove-gigaword-50 vector embeddings instead of high memory transformer models or paid serverless API services
+* Great for initial learning and experimentation with vector embedding models
 
 <p align="center">
   <a href="https://www.apache.org/licenses/LICENSE-2.0">
@@ -19,17 +19,20 @@
   <img src="https://img.shields.io/badge/pip-25.1-blue" alt="Pip Version" />
   <img src="https://img.shields.io/badge/crewai-0.120.1-blue" alt="CrewAI Version" />
   <img src="https://img.shields.io/badge/fastapi-0.115.12-blue" alt="FastAPI Version" />
-  <img src="https://img.shields.io/badge/langchain-0.3.25-blue" alt="LangChain Version" />
-  <img src="https://img.shields.io/badge/pydantic-2.11.4-blue" alt="Pydantic Version" />
 </p>
 
-> **An open-source AI agent framework combining CrewAI, LangChain, and Agentic RAG, with full control over your data.**
+> **Backend code for a demo website built without transformers or LangChain — optimized for lightweight, open-source frontend deployments.**
 
-> Ideal template for orchestrating intelligent multi-agent workflows across diverse applications—such as **AI chatbots**, **automated customer support**, **data analysis**, **sales profiling**, **web scraping and crawling bots**, **dynamic report generation**, **business scheduling**, and **financial planning**—powered by **cloud-hosted LLMs** like **Mistral**."
+> Implements Retrieval-Augmented Generation (RAG) using GloVe (gigaword-50) embeddings, avoiding memory-heavy transformer models and paid serverless APIs.
+
+> Useful for learning and experimenting with vector embedding-based retrieval in a low-resource setup.
+
+> Support with star ⭐ if you find this useful..
 
 Author: [Sarvesh Telang](https://www.linkedin.com/in/sarvesh-telang-17916448/)
 
 ---
+Refer main repo -->
 
 ## ⭐ Key Features
 
@@ -55,11 +58,6 @@ Author: [Sarvesh Telang](https://www.linkedin.com/in/sarvesh-telang-17916448/)
 - **FastAPI Backend + Optional Frontend:** Backend manages routing and conversations, with a frontend deployable on GitHub Pages, Vercel, or any static host.
 
 ---
-
-
-
-
-
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
