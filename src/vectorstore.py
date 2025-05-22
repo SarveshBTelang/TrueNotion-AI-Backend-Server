@@ -19,7 +19,9 @@ class Document:
         return f"Document(metadata={self.metadata})"
 
 # Load environment variables
-load_dotenv()
+if "MISTRAL_API_KEY" not in os.environ:
+    # For running locally or docker run without env vars set,
+    load_dotenv()  # Loads variables from .env into os.environ
 
 UPSTASH_REDIS_REST_URL = os.getenv("UPSTASH_REDIS_REST_URL")
 UPSTASH_REDIS_REST_TOKEN = os.getenv("UPSTASH_REDIS_REST_TOKEN")

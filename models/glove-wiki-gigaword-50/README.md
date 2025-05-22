@@ -15,16 +15,6 @@ Read more:
 Author: Jeffrey Pennington, Richard Socher and Christopher D. Manning
 
 ---
-### Frontend Deployment Solution for Open Source Projects
-- ### Sarvesh Telang
-
-Note:
-This project can be implemented and extended with any advanced vector embedding model. However, free frontend deployment platforms such as Render, Fly.io, Railway, Koyeb, and others typically impose strict resource limits — usually around 512 MB RAM and 1 GB storage.
-
-These constraints necessitate completely isolating the app from outbound HTTP calls, which makes running large transformer models with high parameter counts impractical unless you chose paid services or rely on serverless APIs.
-
-Proposed Approach:
-To address this, you can use a lightweight embedding model that balances moderate accuracy with efficient similarity search.
 
 For fully offline vector embedding generation, download the pre-trained GloVe embeddings file:
 
