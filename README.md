@@ -62,7 +62,7 @@ Author: Jeffrey Pennington, Richard Socher and Christopher D. Manning
 ---
 
 ## Frontend Deployment Solution for Open Source RAG Projects
-- ### Sarvesh Telang
+#### Sarvesh Telang
 
 Note:
 This project can be implemented and extended with any advanced LLM and vector embedding models. However, free frontend deployment platforms such as Render, Fly.io, Railway, Koyeb, and others typically impose strict resource limits — usually around 512 MB RAM and 1 GB storage.
@@ -105,7 +105,7 @@ https://www.edenai.co/post/top-free-embedding-tools-apis-and-open-source-models
 https://www.kaggle.com/code/vikas15/word-embeddings
 
 ---
-Refer main repo -->
+Refer main repo --> [True-Notion-AI](https://github.com/SarveshBTelang/True-Notion-AI)
 
 ## ⭐ Key Features
 
