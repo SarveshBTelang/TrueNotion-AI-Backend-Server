@@ -21,7 +21,7 @@
   <img src="https://img.shields.io/badge/fastapi-0.115.12-blue" alt="FastAPI Version" />
 </p>
 
-> Support with star ⭐ if you find this useful..
+> Support with star ⭐.. It helps more than you think!
 ---
 * Standalone Python app
 ```bash
@@ -78,7 +78,7 @@ glove.6B.50d.txt
 Available on Kaggle:
 https://www.kaggle.com/datasets/watts2/glove6b50dtxt (Author: Ashish Lal)
 
-⚠️ **Important**: Convert GloVe file into the Word2Vec format using the glove2word2vec tool (saved in tools folder). Then, save it under path "models/glove-wiki-gigaword-50" and load it with the python KeyedVectors library for seamless integration into your project.
+⚠️ **Important**: Before running docker, convert GloVe file into the Word2Vec format using the glove2word2vec tool (saved in tools folder). Then, save it under path "models/glove-wiki-gigaword-50" and load it with the python KeyedVectors library.
 
 You can explore a lot more and accurate vector embedding models with txt files, however looking at the currently available sources (May 2025) this Glove-50 model turns out to be having the lowest size (167 mb).
 
