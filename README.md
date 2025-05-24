@@ -78,9 +78,23 @@ glove.6B.50d.txt
 Available on Kaggle:
 https://www.kaggle.com/datasets/watts2/glove6b50dtxt (Author: Ashish Lal)
 
-Convert the GloVe file into the Word2Vec format using the glove2word2vec tool. Then, load it with the python KeyedVectors library for seamless integration into your project.
+⚠️ **Important**: Convert GloVe file into the Word2Vec format using the glove2word2vec tool (saved in tools folder). Then, save it under path "models/glove-wiki-gigaword-50" and load it with the python KeyedVectors library for seamless integration into your project.
 
 You can explore a lot more and accurate vector embedding models with txt files, however looking at the currently available sources (May 2025) this Glove-50 model turns out to be having the lowest size (167 mb).
+
+To improve accuracy in vector-based retrieval, consider the following strategies:
+
+* Adjust RAG parameters: Tune top_k, chunk_size, and memory to improve retrieval relevance (can be modified remotely through upstash).
+* Tune chunk overlap: Increase overlap to preserve context across chunks (larger memory footprint and slower processing).
+* Data duplication: Re-emphasize important content by repeating it (can introduce bias or redundancy).
+* Preprocessing: Clean and normalize text for better embeddings (may risk over-cleaning and data loss).
+* Use transformer-based embeddings: Leverage models like Sentence-BERT for semantic accuracy (high memory and compute usage; may exceed free-tier limits).
+* Deploy domain-specific models: Fine-tune embeddings for your use case (requires labeled data and training time).
+* Utilize caching: Store computed embeddings to reduce latency (increases storage and complexity).
+* Use vector quantization: Apply techniques like FAISS PQ/HNSW for scalable search (may reduce embedding precision slightly).
+* Use serverless APIs: Services like Cohere or DeepInfra offer scalable embedding generation (paid services; may have latency limits).
+* Deploy on-premise or hybrid models: Ensure data privacy and control (requires infrastructure and maintenance).
+* Use custom LLMs for embeddings: Possible but inefficient compared to dedicated embedding models (Less Effective, resource-heavy, minimal gains).
 
 Alternatively if your server platform allows more storage you can experiment with other embedding models listed in following sources:
 

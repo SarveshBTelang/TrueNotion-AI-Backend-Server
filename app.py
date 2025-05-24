@@ -20,7 +20,7 @@ app = FastAPI()
 # Enable CORS for frontend to connect
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://truenotionai.github.io/"], # Change to "*" during development and replace with your frontend domain after deployment 
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -45,7 +45,7 @@ try:
         rag_parameters = json.load(f)
 except (Exception, KeyError) as e:
     print(f"Info: Could not load rag_config, using default config.")
-    with open('/tmp/rag/default_rag_config.json','r') as f:
+    with open('rag/default_rag_config.json','r') as f:
         rag_parameters = json.load(f)
 
 file_path = os.path.join(os.getcwd(), "/tmp/rag/rag_config.json")
@@ -189,13 +189,12 @@ class AgentConfig(BaseModel):
 def save_agent_config(config: AgentConfig):
     try:
         # Define the file path where the configuration will be saved. Here, we save the file in the backend folder.
-        file_path = os.path.join(os.getcwd(), "agents/agent_config.json")
+        file_path = os.path.join(os.getcwd(), "/tmp/agents/agent_config.json")
         with open(file_path, "w") as f:
             json.dump(config.dict(), f, indent=2)
-        vectorstore.upload_agent_config_to_upstash(filepath="'/tmp/agents/agent_config.json", key="agent_config")
         return {"message": "Agent configuration saved successfully.", "file_path": file_path}
-    
     except Exception as e:
+        load_default_agent.load_default_config()
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/loaded-files-reference")

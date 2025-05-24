@@ -238,9 +238,6 @@ def initialize_system(adjusted_k=10, adjusted_chunk_size=1000):
     documents, keys = load_dataset_from_upstash()
     print(f"Loaded {len(documents)} documents.")
 
-    print("Upstash_data", documents)
-    print("type", type(documents))
-
     if not documents and not json_files:
         raise RuntimeError("No data found. Please ensure data is available in the database.")
 
