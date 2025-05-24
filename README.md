@@ -10,10 +10,10 @@
   <a href="https://www.apache.org/licenses/LICENSE-2.0">
     <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" />
   </a>
-  <img src="https://img.shields.io/github/repo-size/SarveshBTelang/True-Notion-AI-Backend-Server" alt="Repo Size" />
-  <img src="https://img.shields.io/github/last-commit/SarveshBTelang/True-Notion-AI-Backend-Server" alt="Last Commit" />
-  <img src="https://img.shields.io/github/issues/SarveshBTelang/True-Notion-AI-Backend-Server" alt="Issues" />
-  <img src="https://img.shields.io/github/issues-pr/SarveshBTelang/True-Notion-AI-Backend-Server" alt="Pull Requests" />
+  <img src="https://img.shields.io/github/repo-size/SarveshBTelang/TrueNotion-AI-Backend-Server" alt="Repo Size" />
+  <img src="https://img.shields.io/github/last-commit/SarveshBTelang/TrueNotion-AI-Backend-Server" alt="Last Commit" />
+  <img src="https://img.shields.io/github/issues/SarveshBTelang/TrueNotion-AI-Backend-Server" alt="Issues" />
+  <img src="https://img.shields.io/github/issues-pr/SarveshBTelang/TrueNotion-AI-Backend-Server" alt="Pull Requests" />
   <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg" alt="Contributions welcome" />
   <img src="https://img.shields.io/badge/python-3.10.0-blue" alt="Python Version" />
   <img src="https://img.shields.io/badge/pip-25.1-blue" alt="Pip Version" />
