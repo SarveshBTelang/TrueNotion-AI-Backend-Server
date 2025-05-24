@@ -91,17 +91,28 @@ def load_dataset_from_upstash():
                     "source_key": key
                 }
             )
+            
             all_documents.append(doc)
 
     return all_documents, keys
 
 
-def chunk_documents(documents, chunk_size=1000, chunk_overlap=50):
+def chunk_documents(documents, chunk_size=1000, chunk_overlap_percent=20):
     """
-    Splits documents into smaller chunks to improve retrieval performance.
-    This implementation splits the text into fixed-size chunks with overlap.
+    Splits documents into smaller chunks with an overlap specified as a percentage of chunk_size.
+
+    Args:
+        documents: list of Document objects.
+        chunk_size: int, size of each chunk in characters.
+        chunk_overlap_percent: int or float, overlap size as a percentage of chunk_size (0-100).
+
+    Returns:
+        List of chunked Document objects.
     """
     chunked_docs = []
+    # Calculate actual overlap size in characters
+    chunk_overlap = int(chunk_size * chunk_overlap_percent / 100)
+
     for doc in documents:
         text = doc.page_content
         start = 0
@@ -109,6 +120,7 @@ def chunk_documents(documents, chunk_size=1000, chunk_overlap=50):
             end = start + chunk_size
             chunk = text[start:end]
             chunked_docs.append(Document(page_content=chunk, metadata=doc.metadata))
+            # Move start pointer forward by chunk_size minus overlap (characters)
             start += chunk_size - chunk_overlap
     return chunked_docs
 
@@ -159,10 +171,6 @@ def create_vectorstore(documents):
     Creates a vectorstore by embedding document chunks using a local lightweight GloVe model.
     Uses FAISS for vector similarity search.
     """
-    from gensim.models import KeyedVectors
-    import faiss
-    import numpy as np
-
     # Load the local GloVe model
     model = KeyedVectors.load_word2vec_format('models/glove-wiki-gigaword-50/glove.6B.50d.word2vec.txt', binary=False)
     dim = model.vector_size
@@ -187,7 +195,7 @@ def create_vectorstore(documents):
     return VectorStore(index=index, documents=documents, model=model, dim=dim)
 
 
-def upload_agent_config_to_upstash(filepath="agents/agent_config.json", key="agent_config"):
+def upload_agent_config_to_upstash(filepath="/tmp/agents/agent_config.json", key="agent_config"):
     """
     Uploads a local JSON file to Upstash Redis under the specified key.
     """
@@ -214,8 +222,6 @@ def initialize_system(adjusted_k=10, adjusted_chunk_size=1000):
     """
     Loads documents, chunks them, and creates a vector store retriever.
     """
-    # NOTE: If the extract_pages call is not needed for local vectorstore creation,
-    # you may choose to remove or comment it out.
     connect_notion.extract_pages()
 
     data_folder = os.path.join(os.getcwd(), "data")
@@ -231,6 +237,9 @@ def initialize_system(adjusted_k=10, adjusted_chunk_size=1000):
     print("=== Loading Datasets ===")
     documents, keys = load_dataset_from_upstash()
     print(f"Loaded {len(documents)} documents.")
+
+    print("Upstash_data", documents)
+    print("type", type(documents))
 
     if not documents and not json_files:
         raise RuntimeError("No data found. Please ensure data is available in the database.")

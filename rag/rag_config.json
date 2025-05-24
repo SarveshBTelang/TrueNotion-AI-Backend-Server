@@ -1,5 +1,5 @@
 {
-  "k": 10,
-  "chunk_size": 1000,
+  "k": 5,
+  "chunk_size": 800,
   "memory": 3
 }

@@ -10,6 +10,9 @@ from agents import load_default_agent
 from src import vectorstore, vectorstore #process
 from src.banner import print_banner
 
+os.makedirs("/tmp/agents", exist_ok=True)
+os.makedirs("/tmp/rag", exist_ok=True)
+
 print("Initializing..")
 print_banner()
 
@@ -26,8 +29,8 @@ memory = None  # Number of historical conversation pairs to include
 
 def load_rag_config():
     """Load the RAG configuration from file. Fallback to default if any error occurs."""
-    config_file = os.path.join('rag', 'rag_config.json')
-    default_config_file = os.path.join('rag', 'default_rag_config.json')
+    config_file = os.path.join('/tmp','rag', 'rag_config.json')
+    default_config_file = os.path.join('/tmp','rag', 'default_rag_config.json')
     try:
         with open(config_file, 'r') as f:
             rag_parameters = json.load(f)
@@ -122,6 +125,8 @@ def chat_loop():
             
             else:
                 full_context = f"""Context:{context}"""
+
+            print("full_context", full_context)
 
             now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             inputs = {

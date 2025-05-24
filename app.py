@@ -12,12 +12,15 @@ from src import vectorstore
 import os
 import json
 
+os.makedirs("/tmp/agents", exist_ok=True)
+os.makedirs("/tmp/rag", exist_ok=True)
+
 app = FastAPI()
 
 # Enable CORS for frontend to connect
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://truenotionai.github.io/"], # Change to "*" during development and replace with your frontend domain after deployment 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,18 +41,18 @@ chunk_size = None
 memory = None  # Number of historical conversation pairs to include
 
 try:
-    with open('rag/rag_config.json','r') as f:
+    with open('/tmp/rag/rag_config.json','r') as f:
         rag_parameters = json.load(f)
 except (Exception, KeyError) as e:
     print(f"Info: Could not load rag_config, using default config.")
-    with open('rag/default_rag_config.json','r') as f:
+    with open('/tmp/rag/default_rag_config.json','r') as f:
         rag_parameters = json.load(f)
 
-file_path = os.path.join(os.getcwd(), "rag/rag_config.json")
+file_path = os.path.join(os.getcwd(), "/tmp/rag/rag_config.json")
 with open(file_path, "w") as f:
     json.dump(rag_parameters, f, indent=2)
 
-vectorstore.upload_agent_config_to_upstash(filepath="rag/rag_config.json", key="rag_config")
+vectorstore.upload_agent_config_to_upstash(filepath="/tmp/rag/rag_config.json", key="rag_config")
 
 k = rag_parameters.get("k")
 chunk_size = rag_parameters.get("chunk_size")
@@ -189,7 +192,7 @@ def save_agent_config(config: AgentConfig):
         file_path = os.path.join(os.getcwd(), "agents/agent_config.json")
         with open(file_path, "w") as f:
             json.dump(config.dict(), f, indent=2)
-        vectorstore.upload_agent_config_to_upstash(filepath="agents/agent_config.json", key="agent_config")
+        vectorstore.upload_agent_config_to_upstash(filepath="'/tmp/agents/agent_config.json", key="agent_config")
         return {"message": "Agent configuration saved successfully.", "file_path": file_path}
     
     except Exception as e:
@@ -207,7 +210,7 @@ def reset_backend_state():
     global loaded_files_reference
     try:
         rag_parameters = load_default_agent.fetch_config_from_upstash("rag_config")
-        file_path = os.path.join(os.getcwd(), "rag/rag_config.json")
+        file_path = os.path.join(os.getcwd(), "/tmp/rag/rag_config.json")
         with open(file_path, "w") as f:
             json.dump(rag_parameters, f, indent=2)
 
@@ -227,7 +230,7 @@ def reset_backend_state():
     
     except (Exception, KeyError) as e:
         print(f"Info: Could not load rag_config, using default config.")
-        with open('rag/default_rag_config.json','r') as f:
+        with open('/tmp/rag/default_rag_config.json','r') as f:
             rag_parameters = json.load(f)
 
         k = rag_parameters.get("k")
